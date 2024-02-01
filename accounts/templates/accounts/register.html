@@ -15,7 +15,7 @@
                 <form action="{% url 'accounts:account_register' %}" method="post">
                     {% csrf_token %}
                     <div class="form-floating">
-                        <input type="text" class="form-control" id="email" name="email_id" placeholder="8377894662">
+                        <input type="tel" pattern="[6-9]{1}[0-9]{9}" class="form-control" id="email" name="email_id" placeholder="8377894662" required>
                         <label for="email">mobile(+91)</label>
                     </div>
                     <br/>

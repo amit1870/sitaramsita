@@ -29,7 +29,7 @@ def account_register(request):
         varn = form_data.get('varn', 'SDH')
 
         if not hlp.verify_mobile(mobile):
-            context['message'] = 'enter 10 digit mobile numbers only.'
+            context['message'] = 'check mobile number.'
 
         if 'message' not in context:
             hexcode = hlp.generate_otp()
@@ -107,7 +107,7 @@ def account_password(request):
     mobile = form_data.get('email_id', '')
 
     if not hlp.verify_mobile(mobile):
-        context['message'] = 'enter 10 digit mobile numbers only.'
+        context['message'] = 'check mobile number.'
 
     if 'message' not in context:
         hexcode = hlp.generate_otp()
@@ -149,7 +149,7 @@ def account_login(request):
         login(request, user)
         return redirect("dukan:dashboard")
 
-    context['message'] = 'please check email and password combination.'
+    context['message'] = 'check email and password.'
     return render(request, 'accounts/login.html', context)
 
 
