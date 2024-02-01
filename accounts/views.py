@@ -147,7 +147,7 @@ def account_login(request):
 
     if user:
         login(request, user)
-        return redirect("dukan:dashboard")
+        return redirect("accounts:sitaram")
 
     context['message'] = 'check email and password.'
     return render(request, 'accounts/login.html', context)
