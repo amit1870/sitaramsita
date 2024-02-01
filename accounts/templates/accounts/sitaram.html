@@ -1,0 +1,38 @@
+{% extends "accounts/base.html" %}
+{% load static %}
+{% block site_wrapper %}
+<div class="container" style="padding-top: 100px;">
+    <div class="row">
+        <div class="col-sm-2">
+            <img src="{% static 'accounts/img/ramanuj.jpg' %}" class="img-fluid" alt="sitaram" onclick="window.open('https://www.youtube.com/@swamiRaghvacharya/streams')" role="button">
+            <br/><br/>
+            {% if request.user.is_authenticated %}
+            <a class="btn btn-outline-success" href="{% url 'accounts:sitaram' %}" role="button">&nbsp;&nbsp;&nbsp;सीताराम&nbsp;&nbsp;&nbsp;</a>
+            <a class="btn btn-outline-success" href="{% url 'accounts:account_logout' %}" role="button">लॉगआउट</a>
+
+            {% else %}
+            <a class="btn btn-outline-success" href="{% url 'accounts:sitaram' %}" role="button">&nbsp;&nbsp;&nbsp;सीताराम&nbsp;&nbsp;&nbsp;</a>
+            <a class="btn btn-outline-success" href="{% url 'accounts:account_login' %}" role="button">&nbsp;&nbsp;&nbsp;लॉगिन&nbsp;&nbsp;&nbsp;</a>
+            {% endif %}
+
+        </div>
+        <div class="col-sm-8">
+            <img src="{% static 'accounts/img/sitaram.jpg' %}" class="img-fluid" alt="sitaram">
+        </div>
+        <div class="col-sm-2">
+            <img src="{% static 'accounts/img/guruvar.jpg' %}" class="img-fluid" alt="sitaram" onclick="window.open('https://www.youtube.com/@swamiRaghvacharya/streams')" role="button">
+            <br/><br/>
+            {% if request.user.is_authenticated %}
+            <a class="btn btn-outline-success" href="{% url 'accounts:sitaram' %}" role="button">&nbsp;&nbsp;&nbsp;सीताराम&nbsp;&nbsp;&nbsp;</a>
+            <a class="btn btn-outline-success" href="{% url 'accounts:account_logout' %}" role="button">लॉगआउट</a>
+            
+            {% else %}
+            <a class="btn btn-outline-success" href="{% url 'accounts:account_password' %}" role="button">&nbsp;&nbsp;&nbsp;पासवर्ड&nbsp;&nbsp;&nbsp;</a>
+            <a class="btn btn-outline-success" href="{% url 'accounts:account_register' %}" role="button">&nbsp;&nbsp;&nbsp;जुड़ाव&nbsp;&nbsp;&nbsp;</a>
+            {% endif %}
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}
