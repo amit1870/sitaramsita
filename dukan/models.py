@@ -7,9 +7,9 @@ def get_default_category():
     return Category.objects.get(code='ALL')
 
 class Category(models.Model):
+    added_by = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
     name = models.CharField(max_length=30, default='all', unique=True)
     code = models.CharField(max_length=5, default='ALL', unique=True)
-    added_by = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
     help_text = models.CharField(max_length=200, default='help text for category', unique=False)
 
 
@@ -21,6 +21,7 @@ class Category(models.Model):
 class Product(models.Model):
     added_by = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
     category = models.ForeignKey(Category, on_delete=models.SET(get_default_category))
+    help_text = models.CharField(max_length=200, default='help text for product', unique=False)
     name = models.CharField(max_length=50, unique=True)
     cost = models.DecimalField(max_digits=7,decimal_places=1, default=0)
     unit = models.CharField(max_length=3)
@@ -32,6 +33,7 @@ class Product(models.Model):
 
 
 class PaymentMethod(models.Model):
+    added_by = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
     payee_name = models.CharField(max_length=255, blank=False)
     payee_mobile = models.CharField(max_length=10, blank=False)
     payee_medium = models.CharField(max_length=255, blank=False)
@@ -47,6 +49,7 @@ class Payment(models.Model):
     payment_mobile = models.CharField(max_length=10, blank=False)
     payment_date = models.DateField()
     payment_string = models.CharField(max_length=255, blank=False, unique=True)
+    help_text = models.CharField(max_length=200, default='help text for payment', unique=False)
 
 
     def __str__(self):
@@ -71,8 +74,9 @@ class Order(models.Model):
 
 
 class Cart(models.Model):
-    name = models.CharField(max_length=50, unique=False, default='cart')
     added_by = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
+    name = models.CharField(max_length=50, unique=False, default='cart')
+    help_text = models.CharField(max_length=200, default='help text for cart', unique=False)
     products = models.ManyToManyField(Product)
     total_cost = models.DecimalField(max_digits=10,decimal_places=1, default=0)
     payment = models.CharField(max_length=4, choices=PAYMENT, default='PSPD')
@@ -86,6 +90,7 @@ class Cart(models.Model):
 class CartTemplate(models.Model):
     added_by = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
     name = models.CharField(max_length=20, unique=True)
+    help_text = models.CharField(max_length=200, default='help text for cart template', unique=False)
     products = models.ManyToManyField(Product)
 
     def __str__(self):

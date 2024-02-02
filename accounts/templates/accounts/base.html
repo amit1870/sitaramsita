@@ -30,9 +30,11 @@
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="#">Products</a>
                     </li>
+                    {% if request.user.is_authenticated %}
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="#">Orders</a>
                     </li>
+                    {% endif %}
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="#">Carts</a>
                     </li>
@@ -43,6 +45,12 @@
                     {% else %}
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="{% url 'accounts:account_login' %}">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="{% url 'accounts:account_password' %}">Password</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="{% url 'accounts:account_register' %}">Register</a>
                     </li>
                     {% endif %}
                 </ul>
