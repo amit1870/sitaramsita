@@ -10,10 +10,79 @@
         <meta name="keywords" content="sri sitaram">
         <link rel="stylesheet" type="text/css" href="{% static 'accounts/css/bootstrap.min.css' %}"/>
         <link rel="stylesheet" type="text/css" href="{% static 'accounts/css/sitaram.css' %}"/>
-        <script type="text/javascript" src="{% static 'accounts/js/bootstrap.bundle.min.js' %}"></script>
-        <script type="text/javascript" src="{% static 'accounts/js/sitaram.js' %}"></script>
+        <link rel="stylesheet" type="text/css" href="{% static 'accounts/css/product.css' %}"/>
     </head>
 <body>
-{% block site_wrapper %} {% endblock %}
+    <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
+        <symbol id="aperture" fill="orange" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="10"/>
+            <path d="M14.31 8l5.74 9.94M9.69 8h11.48M7.38 12l5.74-9.94M9.69 16L3.95 6.06M14.31 16H2.83m13.79-4l-5.74 9.94"/>
+        </symbol>
+    </svg>
+
+    <nav class="navbar navbar-dark bg-dark" aria-label="First navbar example">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="{% url 'accounts:sitaram' %}">सीताराम</a>
+            <svg class="bi" width="24" height="24" data-bs-toggle="collapse" data-bs-target="#sitaramNavbar" aria-controls="sitaramNavbar" aria-expanded="false" aria-label="Toggle navigation" role="button" ><use xlink:href="#aperture"/></svg>
+
+            <div class="collapse navbar-collapse" id="sitaramNavbar">
+                <ul class="navbar-nav me-auto mb-2">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Products</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Orders</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Carts</a>
+                    </li>
+                    {% if request.user.is_authenticated %}
+                        <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="{% url 'accounts:account_logout' %}">Logout</a>
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="{% url 'accounts:account_login' %}">Login</a>
+                    </li>
+                    {% endif %}
+                </ul>
+                <form role="search">
+                    <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+                </form>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        {% block site_wrapper %} {% endblock %}
+    </main>
+
+    <footer class="container py-5">
+        <div class="row">
+            <div class="col-12 col-sm">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="orange" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="d-block mb-2" role="img" viewBox="0 0 24 24"><title>सीताराम</title><circle cx="12" cy="12" r="10"/><path d="M14.31 8l5.74 9.94M9.69 8h11.48M7.38 12l5.74-9.94M9.69 16L3.95 6.06M14.31 16H2.83m13.79-4l-5.74 9.94"/></svg>
+                <small class="d-block mb-3 text-body-secondary">&copy; {%now "Y"%}</small>
+            </div>
+            <div class="col-6 col-md">
+                <h5>Online</h5>
+                <ul class="list-unstyled text-small">
+                    <li><a class="link-secondary text-decoration-none" href="#">Web</a></li>
+                    <li><a class="link-secondary text-decoration-none" href="#">Facebook</a></li>
+                    <li><a class="link-secondary text-decoration-none" href="#">Social</a></li>
+                </ul>
+            </div>
+            <div class="col-6 col-md">
+                <h5>Offline</h5>
+                <ul class="list-unstyled text-small">
+                    <li><a class="link-secondary text-decoration-none" href="#">About</a></li>
+                    <li><a class="link-secondary text-decoration-none" href="#">Address</a></li>
+                    <li><a class="link-secondary text-decoration-none" href="#">Team</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+    <script type="text/javascript" src="{% static 'accounts/js/jquery-3.7.1.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'accounts/js/bootstrap.bundle.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'accounts/js/sitaram.js' %}"></script>
 </body>
 </html>
