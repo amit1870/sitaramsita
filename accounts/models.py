@@ -7,7 +7,7 @@ VARN = [('BMH', 'Bramhan'),('KSH', 'Kshatriya'),('VSH', 'Vaishya'),('SDH', 'Sudr
 class UserManager(BaseUserManager):
 
     def create_user(self, email, mobile, password, **other_fields):
-        user = self.model(email, mobile, **other_fields)
+        user = self.model(email=email, mobile=mobile, **other_fields)
         user.set_password(password)
         user.save(self._db)
 
