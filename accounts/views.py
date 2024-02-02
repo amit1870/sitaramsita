@@ -41,7 +41,7 @@ def account_register(request):
                     manushya.save()
                     return redirect("accounts:account_activate", manushya.id, mobile)
                 else:
-                    context['message'] = 'server error'
+                    context['message'] = 'failure !! server error'
             else:
                 context['message'] = 'success !! already registered'
 
@@ -73,11 +73,11 @@ def account_activate(request, msid, mobile):
         password2 = form_data.get('password2', '')
 
         if len(password1) < 4:
-            context['message'] = 'use 4+ four plus length password.'
+            context['message'] = 'failure !! use four plus length password.'
             return render(request, 'accounts/password.html', context)
 
         elif len(password1) > 3 and password1 != password2:
-            context['message'] = 'both password are not same.'
+            context['message'] = 'failure !! password not matching.'
             return render(request, 'accounts/password.html', context)
 
         manushya = get_user_model().objects.filter(mobile=mobile, hexcode=hexcode).first()
@@ -87,7 +87,7 @@ def account_activate(request, msid, mobile):
             manushya.hexcode = ''
             manushya.save()
         else:
-            context['message'] = 'hexcode is not valid.'
+            context['message'] = 'failure !! hexcode not valid.'
             return render(request, 'accounts/password.html', context)
 
         return redirect("accounts:account_login")
@@ -107,7 +107,7 @@ def account_password(request):
     mobile = form_data.get('email_id', '')
 
     if not hlp.verify_mobile(mobile):
-        context['message'] = 'check mobile number.'
+        context['message'] = 'failure !! check mobile number.'
 
     if 'message' not in context:
         hexcode = hlp.generate_otp()
@@ -119,10 +119,10 @@ def account_password(request):
                 manushya.save()
                 return redirect("accounts:account_activate", manushya.id, mobile)
             else:
-                context['message'] = 'server error'
+                context['message'] = 'failure !! server error'
                 return render(request, 'accounts/forgot.html', context)
         else:
-            context['message'] = 'please register here.'
+            context['message'] = 'info !! please register here.'
             return render(request, 'accounts/register.html', context)
 
 
@@ -149,7 +149,7 @@ def account_login(request):
         login(request, user)
         return redirect("accounts:sitaram")
 
-    context['message'] = 'check email and password.'
+    context['message'] = 'failure !! check email and password'
     return render(request, 'accounts/login.html', context)
 
 

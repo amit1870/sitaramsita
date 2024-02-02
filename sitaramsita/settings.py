@@ -25,7 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv('SECRET_KEY','')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['127.0.0.1','amitxvf.pythonanywhere.com', 'www.amitxvf.pythonanywhere.com']
 
@@ -139,3 +139,6 @@ FAST_SMS = {
     'URL' : 'https://www.fast2sms.com/dev/bulkV2',
     'AUTH_KEY' : os.getenv('FAST_SMS_AUTH_KEY','')
 }
+
+GMAIL_ID = os.getenv('gmail', 'sitaram')
+
