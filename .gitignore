@@ -5,7 +5,7 @@ __pycache__/
 
 # Migrations
 accounts/migrations/*
-migrations/*
+dukan/migrations/*
 
 # Database
 db.sqlite3

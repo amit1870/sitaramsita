@@ -7,7 +7,7 @@ VARN = [('BMH', 'Bramhan'),('KSH', 'Kshatriya'),('VSH', 'Vaishya'),('SDH', 'Sudr
 class UserManager(BaseUserManager):
 
     def create_user(self, email, mobile, password, **other_fields):
-        user = self.model(email=email, mobile=mobile, **other_fields)
+        user = self.model(email, mobile, **other_fields)
         user.set_password(password)
         user.save(self._db)
 
@@ -28,7 +28,7 @@ class UserManager(BaseUserManager):
 
 
 class Manushya(AbstractBaseUser, PermissionsMixin):
-    name = models.CharField(max_length=10, blank=True)
+    name = models.CharField(max_length=10, blank=True, default='sitaram')
     email = models.EmailField(max_length=50, blank=True)
     mobile = models.CharField(max_length=10, unique=True)
     varn = models.CharField(max_length=3, choices=VARN, default='SDH')
