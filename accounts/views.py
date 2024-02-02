@@ -165,7 +165,3 @@ def account_logout(request):
 
     if request.method == 'GET':
         return render(request, 'accounts/login.html', context)
-
-def sitaram_features(request):
-    context = {}
-    return render(request, 'accounts/features.html', context)
