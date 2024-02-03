@@ -1,5 +1,7 @@
 import secrets
 import requests
+from datetime import date
+
 from sitaramsita import settings
 
 def verify_mobile(mobile):
@@ -56,3 +58,28 @@ def send_otp(numbers, otp):
         success = True
 
     return success
+
+
+def process_form_data(form_data):
+    qty_with_ids = {}
+
+    for key, value in form_data.items():
+        if key.startswith('ord_qty_'):
+            product_id = int(key.split('ord_qty_')[1])
+            try:
+                qty_value = float(value)
+            except:
+                qty_value = 0
+
+            qty_with_ids[product_id] = qty_value
+
+
+    return qty_with_ids
+
+
+def today_date():
+    return date.today()
+
+
+
+

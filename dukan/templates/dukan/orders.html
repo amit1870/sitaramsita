@@ -1,31 +1,31 @@
-{% extends "dukan/base.html" %}
+{% extends "accounts/base.html" %}
 {% load static %}
 {% block site_wrapper %}
 
-<div class="row">
-    {% for order in pending %}
-    <div class="col-sm-4">
-        <div class="card">
-            <div class="card-body">
-                <ul class="list-group">
-                    <li class="list-group-item list-group-item-dark">सामान &nbsp; &nbsp; &nbsp; दाम  &nbsp; &nbsp; &nbsp;  {{order.order_by.mobile}}</li>
-                    {% for product in order.products.all %}
-                        <li class="list-group-item list-group-item-dark">{{ product }}&nbsp; &nbsp; &nbsp;{{ product.cost }}/{{ product.unit }} </li>
-                    {% endfor %}
-                    {% if order.payment != 'PRPD' %}
-                        <li class="list-group-item list-group-item-danger">{{ order.payment }}    {{ order.order_cost }} &#8377; 
-                            &nbsp; &nbsp; &nbsp;<a href="{% url 'dukan:confirm_order'  order_id=order.id %}" class="btn btn-outline-danger btn-sm">confirm</a>
-                        </li>
-                    {% else %}
-                        <li class="list-group-item list-group-item-success">{{ order.payment }}    {{ order.order_cost }} &#8377; 
-                            &nbsp; &nbsp; &nbsp;<a href="{% url 'dukan:confirm_order'  order_id=order.id %}" class="btn btn-outline-success btn-sm">confirm</a>
-                        </li>
-                    {% endif %}
-                </ul>
+<div class="container">
+    <div class="row">
+        {% for order in pending %}
+        <div class="col-sm-4">
+            <div class="card">
+                <div class="card-body">
+                    <ul class="list-group">
+                        {% if order.payment == 'PRPD' %}
+                            <li class="list-group-item list-group-item-success">सामान &nbsp; &nbsp; &nbsp; दाम  &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; price {{order.order_by.mobile}}</li>
+                            {% for product in order.products.all %}
+                                <li class="list-group-item list-group-item-success">{{ product }}&nbsp; &nbsp; &nbsp;{{ product.cost }}/{{ product.unit }} </li>
+                            {% endfor %}
+                        {% else %}
+                            <li class="list-group-item list-group-item-warning">सामान &nbsp; &nbsp; &nbsp; दाम  &nbsp; &nbsp; &nbsp;  {{order.order_by.mobile}}</li>
+                            {% for product in order.products.all %}
+                                <li class="list-group-item list-group-item-warning">{{ product }}&nbsp; &nbsp; &nbsp;{{ product.cost }}/{{ product.unit }} </li>
+                            {% endfor %}
+                        {% endif %}
+                    </ul>
+                </div>
             </div>
         </div>
+        {% endfor %}
     </div>
-    {% endfor %}
 </div>
 
 {% endblock %}

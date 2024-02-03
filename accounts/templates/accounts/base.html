@@ -32,7 +32,7 @@
                     </li>
                     {% if request.user.is_authenticated %}
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Orders</a>
+                        <a class="nav-link active" aria-current="page" href="{% url 'dukan:view_orders' %}">Orders</a>
                     </li>
                     {% endif %}
                     <li class="nav-item">
