@@ -28,7 +28,7 @@
             <div class="collapse navbar-collapse" id="sitaramNavbar">
                 <ul class="navbar-nav me-auto mb-2">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Products</a>
+                        <a class="nav-link active" aria-current="page" href="{% url 'dukan:view_all_product' %}">Products</a>
                     </li>
                     {% if request.user.is_authenticated %}
                     <li class="nav-item">
@@ -36,7 +36,7 @@
                     </li>
                     {% endif %}
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Carts</a>
+                        <a class="nav-link active" aria-current="page" href="{% url 'dukan:view_cart' %}">Carts</a>
                     </li>
                     {% if request.user.is_authenticated %}
                         <li class="nav-item">
