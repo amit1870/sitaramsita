@@ -88,6 +88,7 @@ def category_products(request, ctgry_id):
 
 
 @csrf_protect
+@login_required
 @require_http_methods(["POST"])
 def add_product_in_cart(request, prd_id):
     ''' view to add product in cart into sitaram application '''
@@ -109,6 +110,7 @@ def add_product_in_cart(request, prd_id):
 
 
 @csrf_protect
+@login_required
 @require_http_methods(["GET", "POST"])
 def view_cart(request):
     ''' view to add product in cart into sitaram application '''
@@ -119,6 +121,7 @@ def view_cart(request):
         cart, created = Cart.objects.get_or_create(added_by=request.user)
         context['cart'] = cart
         return render(request, 'dukan/cart.html', context)
+
 
 
 @csrf_protect
@@ -242,6 +245,8 @@ def view_orders(request):
     context['pending'] = pending
 
     return render(request, 'dukan/orders.html', context)
+
+
 
 
 @csrf_protect
