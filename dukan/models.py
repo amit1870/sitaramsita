@@ -47,7 +47,7 @@ class Payment(models.Model):
     payer = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
     payment_amount = models.PositiveIntegerField(blank=False)
     payment_mobile = models.CharField(max_length=10, blank=False)
-    payment_date = models.DateField()
+    payment_date = models.DateField(auto_now_add=True)
     payment_string = models.CharField(max_length=255, blank=False, unique=True)
     help_text = models.CharField(max_length=200, default='help text for payment', unique=False)
 
@@ -65,7 +65,7 @@ class Order(models.Model):
     order_products = models.ManyToManyField(Product)
     order_quantity = models.CharField(max_length=255, blank=False, null=False)
     order_prices = models.CharField(max_length=255, blank=False, null=False)
-    payment = models.CharField(max_length=4, choices=PAYMENT)
+    payment = models.CharField(max_length=4, choices=PAYMENT, default='PSPD')
     payment_string = models.CharField(max_length=255, blank=True)
     
 

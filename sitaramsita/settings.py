@@ -116,7 +116,7 @@ STATIC_URL = 'static/'
 
 STATIC_ROOT = BASE_DIR / 'static'
 
-MEDIA_URL = 'media/'
+MEDIA_URL = '/media/'
 
 MEDIA_ROOT = BASE_DIR / 'media'
 
@@ -135,4 +135,3 @@ FAST_SMS = {
 }
 
 GMAIL_ID = os.getenv('gmail', 'sitaram')
-

@@ -1,6 +1,8 @@
 import secrets
 import requests
+
 from datetime import date
+from pathlib import Path
 
 from sitaramsita import settings
 
@@ -81,5 +83,23 @@ def today_date():
     return date.today()
 
 
+def handle_uploaded_file(f, rename='0'):
+    success = True
 
+    rename = f"{rename}"
+    FILE_PATH = f"{settings.MEDIA_ROOT}/{rename}"
+
+    delete_file(FILE_PATH)
+    
+    try:    
+        with open(FILE_PATH, 'wb+') as destination:
+            for chunk in f.chunks():
+                destination.write(chunk)
+    except (Exception, FileNotFoundError):
+        success = False
+
+    return success
+
+def delete_file(file_path):
+    Path.unlink(Path(file_path), missing_ok=True)
 

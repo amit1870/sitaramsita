@@ -1,0 +1,29 @@
+{% extends "accounts/base.html" %}
+{% load static %}
+{% block site_wrapper %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12">
+            {% if message %}
+                <div class="alert alert-warning" role="alert">
+                    {{ message }}
+                </div>
+            {% endif %}
+            <main class="form-signin w-100 m-auto">
+                <form action="{% url 'dukan:save_product' %}" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="form-floating">
+                        <input type="file" class="form-control" id="image_id_{{product.id}}" aria-describedby="inputGroupFileAddon04" aria-label="Upload" name="image_file">
+                        <label for="image_id_{{product.id}}">प्रोडक्ट की फोटो</label>
+                        <input type="hidden" name="image_id" value="{{product.id}}">
+                    </div>
+                    <button class="btn btn-outline-success w-100 py-2" type="submit">सीताराम</button>
+                </form>
+            </main>
+        </div>
+    </div>
+    <script type="text/javascript" src="{% static 'dukan/js/dukan.js' %}"></script>
+</div>
+
+{% endblock %}

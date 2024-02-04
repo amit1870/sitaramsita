@@ -27,4 +27,10 @@ function calculate_amount(product_id, avl_qty, cost) {
         order_total = order_total + parseFloat(prod_total);
     });
     $("strong[id^='total_strong']").html('&#8377;' + order_total);
+
+    if (order_total == 0){
+        $(':input[type="submit"]').prop('disabled', true);
+    } else {
+        $(':input[type="submit"]').prop('disabled', false);
+    }
 }

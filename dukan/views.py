@@ -32,6 +32,45 @@ def view_all_product(request):
     return render(request, 'dukan/products.html', context)
 
 
+@csrf_protect
+@login_required
+@require_http_methods(["GET"])
+def update_product(request, prd_id):
+    ''' view products of a category into sitaram application '''
+
+    context = {}
+
+    product = Product.objects.filter(id=prd_id).first()
+
+    if request.method == "GET":
+        if product:
+            context['product'] = product
+            return render(request, 'dukan/product.html', context)
+        else:
+            return render(request, 'dukan/dukan_404.html', context)
+    
+
+@csrf_protect
+@login_required
+@require_http_methods(["POST"])
+def save_product(request):
+    ''' view products of a category into sitaram application '''
+
+    context = {}
+
+    file_data = request.FILES
+    form_data = request.POST.copy()
+
+    prd_id = int(form_data.get('image_id', 0))
+    f = file_data.get('image_file', None)
+    
+    if f and hlp.handle_uploaded_file(f, prd_id):
+        return redirect("dukan:view_all_product")
+    else:
+        context['message'] = 'error while saving image on disk'
+        return render(request, 'dukan/product.html', context)
+
+
 
 
 @csrf_protect
@@ -135,8 +174,53 @@ def process_cart(request):
             order.order_cost = total_cost
             order.save()
 
+        payment = form_data.get('payment', 'PSPD')
+
+        if payment == 'PRPD':
+            context = {}
+            context['order'] = order
+            return render(request, 'dukan/payment.html', context)
+
 
     return redirect("dukan:view_orders")
+
+
+
+
+@csrf_protect
+@login_required
+@require_http_methods(["POST"])
+def order_payment(request, order_id):
+    ''' view orders placed into sitaram application '''
+
+    context = {}
+
+    form_data = request.POST.copy()
+
+    order_cost = form_data.get('order_cost', 0)
+    paid_amount = form_data.get('paid_amount', 0)
+    payment_string = form_data.get('payment_string', '')
+    help_text = form_data.get('help_text', '')
+
+    order_cost = float(order_cost)
+    paid_amount = float(paid_amount)
+
+    if order_cost > 0 and (order_cost - paid_amount) <= 10:
+
+        order = Order.objects.get(id=order_id)
+
+        if order and (order.order_cost - order_cost) <= 1:
+            order.payment_string = payment_string
+            order.payment = 'PRPD'
+            order.save()
+        else:
+            return render(request, 'dukan/dukan_404.html', context)
+    else:
+        return render(request, 'dukan/dukan_404.html', context)
+
+    return redirect("dukan:view_orders")
+
+
 
 
 @csrf_protect
@@ -156,3 +240,20 @@ def view_orders(request):
     context['pending'] = pending
 
     return render(request, 'dukan/orders.html', context)
+
+
+@csrf_protect
+@login_required
+@require_http_methods(["GET"])
+def confirm_order(request, order_id):
+    ''' view to confirm order into sitaram application '''
+    context = {}
+
+    order = Order.objects.filter(id=order_id).first()
+
+    if order:
+        order.order_status = False
+        order.save()
+
+    return redirect("dukan:view_orders")
+

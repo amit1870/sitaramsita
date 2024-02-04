@@ -25,12 +25,15 @@
                                     <input type="hidden" id="{{product.id}}" name="product_id" value="{{product.id}}"/>
                                 </div>
                                 <button class="btn btn-outline-warning " type="submit">Cart</button>
-                                <a class="btn btn-outline-warning " type="submit" role="button">Buy</a>
+
+                                {% if request.user.is_superuser %}
+                                    <a class="btn btn-outline-warning " href="{% url 'dukan:update_product'  prd_id=product.id %}" role="button">Update</a>
+                                {% endif %}
                             </form>
                         </p>
                     </div>
                     <div class="bg-body-tertiary shadow-sm mx-auto" style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;">
-                        <img src="{% static 'accounts/img/ramanuj.jpg' %}" class="img-fluid" alt="ramanuj" onclick="window.open('https://www.youtube.com/@swamiRaghvacharya/streams')" role="button">
+                        <img src="/media/{{product.id}}" class="img-fluid" alt="{{product.name}}" role="button">
                     </div>
                 </div>
             </div>
