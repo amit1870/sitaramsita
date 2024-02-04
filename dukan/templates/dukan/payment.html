@@ -8,6 +8,12 @@
             <main class="form-signin w-100 m-auto">
                 <form action="{% url 'dukan:order_payment'  order_id=order.id %}" method="post">
                     {% csrf_token %}
+                    {% for payee in payments %}
+                    <div class="form-floating">
+                        <input type="text" readonly class="form-control-plaintext" name="order_cost" id="{{payee.payee_name}}" value="{{payee.payee_name}}  {{payee.payee_mobile}}  {{payee.payee_medium}}">
+                        <label for="{{payee.payee_name}}">ऑनलाइन पेमेंट</label>
+                    </div>
+                    {% endfor %}
                     <div class="form-floating">
                         <input type="text" readonly class="form-control-plaintext" name="order_cost" id="order_cost" value="{{order.order_cost}}">
                         <label for="order_cost">कुल &#8377;</label>

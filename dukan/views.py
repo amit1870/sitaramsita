@@ -11,7 +11,7 @@ from django.views.decorators.csrf import csrf_protect
 from django.views.decorators.http import require_http_methods
 
 
-from dukan.models import Category, Product, Cart, CartTemplate, Order
+from dukan.models import Category, Product, Cart, CartTemplate, Order, PaymentMethod
 from utils import helper as hlp
 
 
@@ -178,7 +178,9 @@ def process_cart(request):
 
         if payment == 'PRPD':
             context = {}
+            payment_via = PaymentMethod.objects.all()
             context['order'] = order
+            context['payments'] = payment_via
             return render(request, 'dukan/payment.html', context)
 
 
