@@ -61,7 +61,7 @@ def save_product(request):
     file_data = request.FILES
     form_data = request.POST.copy()
 
-    prd_id = int(form_data.get('image_id', 0))
+    prd_id = form_data.get('image_id', 0)
     f = file_data.get('image_file', None)
     
     if f and hlp.handle_uploaded_file(f, prd_id):
