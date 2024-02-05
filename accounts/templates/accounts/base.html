@@ -32,6 +32,9 @@
                     </li>
                     {% if request.user.is_superuser %}
                     <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="{% url 'admin:index' %}">Admin</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="{% url 'dukan:upload_products' %}">Upload</a>
                     </li>
                     <li class="nav-item">
