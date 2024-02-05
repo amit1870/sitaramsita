@@ -18,9 +18,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.getenv('SECRET_KEY','')
 
+USER = os.getenv('USER','amitxvf')
+
 DEBUG = False
 
-ALLOWED_HOSTS = ['127.0.0.1','amitxvf.pythonanywhere.com', 'www.amitxvf.pythonanywhere.com']
+ALLOWED_HOSTS = ['127.0.0.1',f'{USER}.pythonanywhere.com', f'www.{USER}.pythonanywhere.com']
 
 
 # Application definition
