@@ -6,8 +6,8 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="description" content="sri sitaram">
-        <meta name="keywords" content="sri sitaram">
+        <meta name="description" content="{{ meta_description }}">
+        <meta name="keywords" content="{{ meta_keywords }}">
         <link rel="stylesheet" type="text/css" href="{% static 'accounts/css/bootstrap.min.css' %}"/>
         <link rel="stylesheet" type="text/css" href="{% static 'accounts/css/sitaram.css' %}"/>
         <link rel="stylesheet" type="text/css" href="{% static 'accounts/css/product.css' %}"/>
@@ -30,6 +30,14 @@
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="{% url 'dukan:view_all_product' %}">Products</a>
                     </li>
+                    {% if request.user.is_superuser %}
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="{% url 'dukan:upload_products' %}">Upload</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="{% url 'dukan:download_products' %}">Download</a>
+                    </li>
+                    {% endif %}
                     {% if request.user.is_authenticated %}
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="{% url 'dukan:view_orders' %}">Orders</a>
@@ -74,17 +82,17 @@
             <div class="col-6 col-md">
                 <h5>Online</h5>
                 <ul class="list-unstyled text-small">
-                    <li><a class="link-secondary text-decoration-none" href="https://{{gmail_id}}.pythonanywhere.com/">Website</a></li>
-                    <li><a class="link-secondary text-decoration-none" href="#">Whatsapp</a></li>
-                    <li><a class="link-secondary text-decoration-none" href="#">Facebook</a></li>
+                    <li><a class="link-secondary text-decoration-none" href="{{dukan_dtls.website}}">Website</a></li>
+                    <li><a class="link-secondary text-decoration-none" href="{{dukan_dtls.whatsapp}}">Whatsapp</a></li>
+                    <li><a class="link-secondary text-decoration-none" href="{{dukan_dtls.facebook}}">Facebook</a></li>
+                    <li><a class="link-secondary text-decoration-none" href="{{dukan_dtls.social}}">Social</a></li>
                 </ul>
             </div>
             <div class="col-6 col-md">
                 <h5>Offline</h5>
                 <ul class="list-unstyled text-small">
-                    <li><a class="link-secondary text-decoration-none" href="#">About us</a></li>
-                    <li><a class="link-secondary text-decoration-none" href="#">Address</a></li>
-                    <li><a class="link-secondary text-decoration-none" href="#">Team</a></li>
+                    <li><a class="link-secondary text-decoration-none" href="{% url 'dukan:about_dukan' %}">दुकान के बारे में</a></li>
+                    <li>दुकान का पता : {{dukan_dtls.address}}</li>
                 </ul>
             </div>
         </div>

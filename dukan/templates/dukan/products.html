@@ -1,7 +1,7 @@
 {% extends "accounts/base.html" %}
 {% load static %}
 {% block site_wrapper %}
-<link rel="stylesheet" type="text/css" href="{% static 'dukan/css/product.css' %}"/>
+
 <div class="container">
     <div class="row">
         <div class="col-sm-12">
@@ -24,7 +24,7 @@
                                 <div class="form-check form-check-inline">
                                     <input type="hidden" id="{{product.id}}" name="product_id" value="{{product.id}}"/>
                                 </div>
-                                <button class="btn btn-outline-warning " type="submit">Cart</button>
+                                <button class="btn btn-outline-warning " type="submit">Buy</button>
 
                                 {% if request.user.is_superuser %}
                                     <a class="btn btn-outline-warning " href="{% url 'dukan:update_product'  prd_id=product.id %}" role="button">Update</a>

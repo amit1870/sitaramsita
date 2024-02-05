@@ -8,7 +8,7 @@ def get_default_category():
 
 class Category(models.Model):
     added_by = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
-    name = models.CharField(max_length=30, default='all', unique=True)
+    name = models.CharField(max_length=30, default='all', unique=False)
     code = models.CharField(max_length=5, default='ALL', unique=True)
     help_text = models.CharField(max_length=200, default='help text for category', unique=False)
 
@@ -16,13 +16,11 @@ class Category(models.Model):
     def __str__(self):
         return self.code
 
-
-
 class Product(models.Model):
     added_by = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
     category = models.ForeignKey(Category, on_delete=models.SET(get_default_category))
     help_text = models.CharField(max_length=200, default='help text for product', unique=False)
-    name = models.CharField(max_length=50, unique=True)
+    name = models.CharField(max_length=50, unique=False)
     cost = models.DecimalField(max_digits=7,decimal_places=1, default=0)
     unit = models.CharField(max_length=3)
     avl_qty = models.PositiveIntegerField(default=1)
@@ -96,3 +94,19 @@ class CartTemplate(models.Model):
     def __str__(self):
         prod_list = [prod.name for prod in self.products.all()]
         return self.name + " : " + ",".join(prod_list)
+
+
+
+class DukanDetail(models.Model):
+    added_by = models.OneToOneField(get_user_model(), on_delete=models.CASCADE)
+    website = models.CharField(max_length=200, unique=True)
+    whatsapp = models.CharField(max_length=200, unique=False, default='https://web.whatsapp.com/')
+    facebook = models.CharField(max_length=200, unique=False , default='https://www.facebook.com/')
+    social = models.CharField(max_length=200, unique=False, default='https://www.facebook.com/')
+    about_us = models.CharField(max_length=255, unique=False, default='We are selling in with sitaram blessing ....')
+    address = models.CharField(max_length=255, unique=False, default='F 63 , sitaram buidling , sitaram gali, sitarampur, sitaram code 111111')
+    team = models.CharField(max_length=255, unique=False, default='sitaram, ramanuj, bharat, satrudhan')
+
+
+    def __str__(self):
+        return self.website

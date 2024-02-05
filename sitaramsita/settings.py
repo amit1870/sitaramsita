@@ -18,7 +18,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.getenv('SECRET_KEY','')
 
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1','amitxvf.pythonanywhere.com', 'www.amitxvf.pythonanywhere.com']
 
@@ -59,6 +59,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'utils.context_processors.sitaram',
             ],
         },
     },
@@ -134,4 +135,10 @@ FAST_SMS = {
     'AUTH_KEY' : os.getenv('FAST_SMS_AUTH_KEY','')
 }
 
-GMAIL_ID = os.getenv('gmail', 'sitaram')
+SITE_NAME = 'sitaram sitaram'
+
+SITE_ID = 1
+
+META_KEYWORDS = "sitaram dukan apni dukan sitaram"
+
+META_DESCRIPTION = "sitaram apni dukan online"

@@ -10,6 +10,8 @@ urlpatterns = [
     path("products/", views.view_all_product, name="view_all_product"),
     path("products/<int:prd_id>", views.update_product, name="update_product"),
     path("save/", views.save_product, name="save_product"),
+    path("upload/", views.upload_products, name="upload_products"),
+    path("download/", views.download_products, name="download_products"),
     path("categorys/<int:ctgry_id>", views.category_products, name="category_products"),
     
     path("cart/", views.view_cart, name="view_cart"),
@@ -19,6 +21,8 @@ urlpatterns = [
     path("order/", views.process_cart, name="process_cart"),
     path("order/<int:order_id>/confirm", views.confirm_order, name="confirm_order"),
     path("order/<int:order_id>/pay", views.order_payment, name="order_payment"),
+
+    path("dukan/", views.about_dukan, name="about_dukan"),
 
 ] 
 

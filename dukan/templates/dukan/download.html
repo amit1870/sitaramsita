@@ -1,0 +1,24 @@
+{% extends "accounts/base.html" %}
+{% load static %}
+{% block site_wrapper %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12">
+            {% if message %}
+                <div class="alert alert-warning" role="alert">
+                    {{ message }}
+                </div>
+            {% endif %}
+            <main class="form-signin w-100 m-auto">
+                <form action="{% url 'dukan:download_products' %}" method="post">
+                    {% csrf_token %}
+                    <button class="btn btn-outline-success w-100 py-2" type="submit">डाउनलोड प्रोडक्ट</button>
+                </form>
+            </main>
+        </div>
+    </div>
+    <script type="text/javascript" src="{% static 'dukan/js/dukan.js' %}"></script>
+</div>
+
+{% endblock %}

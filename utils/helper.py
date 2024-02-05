@@ -103,3 +103,20 @@ def handle_uploaded_file(f, rename='0'):
 def delete_file(file_path):
     Path.unlink(Path(file_path), missing_ok=True)
 
+
+
+def read_text_file(file_path):
+    data = []
+
+    try:    
+        with open(file_path) as f:
+            data = f.readlines()
+    except (Exception, FileNotFoundError):
+        pass
+
+    return data
+
+def data_from_file(filename):
+    FILE_PATH = f"{settings.MEDIA_ROOT}/{filename}"
+
+    return read_text_file(FILE_PATH)

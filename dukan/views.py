@@ -3,7 +3,6 @@ from django.contrib.auth.decorators import login_required
 
 from django.http import HttpResponse
 
-
 from django.shortcuts import render, redirect
 from django.core import serializers
 
@@ -264,3 +263,116 @@ def confirm_order(request, order_id):
 
     return redirect("dukan:view_orders")
 
+
+@csrf_protect
+@login_required
+@require_http_methods(["GET", "POST"])
+def upload_products(request):
+    ''' view to confirm order into sitaram application '''
+    context = {}
+
+    if request.method == "GET":
+        return render(request, 'dukan/upload.html', context)
+
+    file_data = request.FILES
+    f = file_data.get('products_file', None)
+    
+    if f and hlp.handle_uploaded_file(f, rename='products.txt'):
+
+        products_data_list = hlp.data_from_file('products.txt')
+        header_flag = True
+
+        for prod_data_line in products_data_list:
+            splited_words = prod_data_line.split('||')
+            remove_space = lambda x : x.strip(' \n')
+            splited_words = list(map(remove_space, splited_words))
+
+            if not header_flag and len(splited_words) == 7:
+                category_code = splited_words[1]
+                category_name = splited_words[2]
+                product_name = splited_words[3]
+                product_cost = splited_words[4]
+                product_unit = splited_words[5]
+                product_avl_qty = splited_words[6]
+                
+
+                category, created = Category.objects.get_or_create(added_by=request.user, code=category_code)
+
+                if created:
+                    category.name = category_name
+
+                product, created = Product.objects.get_or_create(added_by=request.user, category=category, name=product_name)
+
+                try:
+                    product.cost = float(product_cost)
+                    product.avl_qty = int(product_avl_qty)
+                except Exception:
+                    pass
+
+                product.unit = product_unit
+                product.save()
+
+
+            if header_flag and 'PROD_ID' in splited_words and 'CATEGORY_CODE' in splited_words and 'PRODUCT_NAME' in splited_words:
+                header = splited_words
+                header_flag = False
+
+        return redirect("dukan:view_all_product")
+    else:
+        context['message'] = 'error while uploading products'
+        return render(request, 'dukan/upload.html', context)
+
+
+@csrf_protect
+@login_required
+@require_http_methods(["GET", "POST"])
+def download_products(request):
+    ''' view to confirm order into sitaram application '''
+    context = {}
+
+    if request.method == "GET":
+        return render(request, 'dukan/download.html', context)
+
+    
+
+    if request.method == "POST":
+        products_file = "products.txt"
+
+        header = "PROD_ID || CATEGORY_CODE   ||  CATEGORY_NAME  || PRODUCT_NAME  ||  PRODUCT_COST || PRODUCT_UNIT  || PRODUCT_QTY"
+
+        all_products = Product.objects.all()
+
+        all_products_list = [header]
+
+        for counter, product in enumerate(all_products):
+            category_code = str(product.category.code)
+            category_name = str(product.category.name)
+            product_name = str(product.name)
+            product_cost = str(product.cost)
+            product_unit = str(product.unit)
+            product_avl_qty = str(product.avl_qty)
+
+            all_products_list.append("||".join([str(counter), category_code, category_name, product_name, product_cost, product_unit, product_avl_qty]))
+
+
+        all_products_content = "\n".join(all_products_list)
+
+        response = HttpResponse(all_products_content, content_type='text/plain')
+        response['Content-Disposition'] = 'attachment; filename={0}'.format(products_file)
+        return response
+
+    else:
+        context['message'] = 'error while downloading products'
+        return render(request, 'dukan/download.html', context)
+
+
+
+
+@csrf_protect
+@require_http_methods(["GET"])
+def about_dukan(request):
+    ''' view products of a category into sitaram application '''
+
+    context = {}
+
+    return render(request, 'dukan/aboutus.html', context)
