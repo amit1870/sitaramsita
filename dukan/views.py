@@ -189,8 +189,6 @@ def process_cart(request):
     return redirect("dukan:view_orders")
 
 
-
-
 @csrf_protect
 @login_required
 @require_http_methods(["POST"])
@@ -226,7 +224,6 @@ def order_payment(request, order_id):
 
 
 
-
 @csrf_protect
 @login_required
 @require_http_methods(["GET" , "POST"])
@@ -247,7 +244,6 @@ def view_orders(request):
 
 
 
-
 @csrf_protect
 @login_required
 @require_http_methods(["GET"])
@@ -262,6 +258,7 @@ def confirm_order(request, order_id):
         order.save()
 
     return redirect("dukan:view_orders")
+
 
 
 @csrf_protect
@@ -354,6 +351,15 @@ def download_products(request):
 
             all_products_list.append("||".join([str(counter), category_code, category_name, product_name, product_cost, product_unit, product_avl_qty]))
 
+        if len(all_products_list) == 1:
+            products_file = "template.txt"
+            all_products_list.append("||".join([str(1), 'FRT', 'Fruits', 'Apple', '100', 'kg', '100']))
+            all_products_list.append("||".join([str(2), 'FRT', 'Fruits', 'Mango', '100', 'kg', '100']))
+            all_products_list.append("||".join([str(3), 'SBJ', 'Sabjiya', 'Matar', '50', 'kg', '50']))
+            all_products_list.append("||".join([str(4), 'SBJ', 'Sabjiya', 'Tamatar', '50', 'kg', '40']))
+            all_products_list.append("||".join([str(4), 'ALL', 'General', 'Pen', '10', 'pc', '60']))
+            all_products_list.append("||".join([str(4), 'ALL', 'General', 'Pencil', '5', 'pc', '90']))
+
 
         all_products_content = "\n".join(all_products_list)
 
@@ -364,8 +370,6 @@ def download_products(request):
     else:
         context['message'] = 'error while downloading products'
         return render(request, 'dukan/download.html', context)
-
-
 
 
 @csrf_protect
