@@ -8,7 +8,7 @@
             {% for category in categorys %}
                 <div class="form-check form-check-inline">
                     <input class="form-check-input" type="radio" name="category" id="{{category.id}}" value="{{category.code}}" onclick="view_products('{{category.id}}');">
-                    <label class="form-check-label" for="{{category.id}}"> {{category.name}} </label>
+                    <label class="form-check-label" for="{{category.id}}"> {{category.code}} </label>
                 </div>
             {% endfor %}
 
@@ -16,7 +16,7 @@
             <div class="d-md-flex flex-md-equal w-100 my-md-3 ps-md-3" id="product_id_{{product.id}}">
                 <div class="text-bg-light me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
                     <div class="my-3 py-3">
-                        <h2 class="display-5">{{product.category.name}} : {{product.name}}</h2>
+                        <h2 class="display-5">{{product.category.code}} : {{product.name}}</h2>
                         <p class="lead">Available : {{product.avl_qty}}  Price : {{product.cost}}/{{product.unit}} </p>
                         <p class="lead">
                             <form action="{% url 'dukan:add_product_in_cart'  prd_id=product.id %}" method="post">
