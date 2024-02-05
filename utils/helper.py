@@ -101,7 +101,10 @@ def handle_uploaded_file(f, rename='0'):
     return success
 
 def delete_file(file_path):
-    Path.unlink(Path(file_path), missing_ok=True)
+    try:
+        Path.unlink(Path(file_path), missing_ok=True)
+    except Exception:
+        pass
 
 
 

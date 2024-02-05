@@ -27,7 +27,7 @@ python manage.py makemigrations accounts dukan
 python manage.py migrate
 
 # run command to create superuser
-python manage.py createsuper
+python manage.py createsuperuser
 
 # create static and media dir
 mkdir -p static media
