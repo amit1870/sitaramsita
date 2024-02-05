@@ -3,23 +3,24 @@
 
 ## [Account Creation]
 
-### create a google account with similar to like dukan
+1. create a google account with similar to like dukan
 
-### create a pythonanywhere.com account with the email
+2. create a pythonanywhere.com account with the email
 
-###  change system image in pythonanywere.com account setting
+3. create a account with fast2sms.com for message otp
 
-### create a account with fast2sms.com for message otp
+## [PythonAnyWhere]
 
-###  get secret key with you that will be used in wsgi setup
+1. create web app manual configuration choosing python3.8
+
+2. test created web app
+
+3. go to console and perform `setup.sh` commands
+
+4. do not forget to reload webapp
 
 
-## [PythonAnyWhere console]
-
-### run setup.sh commands with no error
-
-
-## [wsgi file change and reload]
+## [WSGI]
 
 ```
 import os
