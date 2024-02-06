@@ -6,17 +6,17 @@
 
 > 2. choose a username when registering carefully that will be part of website domain
 
-> 3. for example. if username is amitxvf, then domain will be amitxvf.pythonanywhere.com
+> 3. for example. if username is `amitxvf`, then domain will be [`amitxvf.pythonanywhere.com`](www.amitxvf.pythonanywhere.com/)
 
 > 4. create an account with fast2sms.com for otp message to send
 
-> 5. a secret key will be provided that may be long string like jWhDCaRSfX5YmxZw2qlIKubtTBznVMOLrd39cyPF4pIeU6Bo91QmFtJ8hYjZX3swCTv6pVBdOIWEu7xZ
+> 5. a secret key will be provided that may be long string like `jWhDCaRSfX5YmxZw2qlIKubtTBznVMOLrd39cyPF4pIeU6Bo91QmFtJ8hYjZX3swCTv6pVBdOIWEu7xZ`
 
 > 6. login to pythonanywhere.com with your account
 
-> 7. change system image going into account -> system image -> change to python3.8 all field
+> 7. change system image going into `account -> system image -> change to python3.8 all field`
 
-> 8. create a web app using manual configuration
+> 8. create a web app using manual configuration choosing `python3.8`
 
 > 9. test your web app running successfully
 
@@ -32,7 +32,7 @@
 
 > 15. do not forget to reload webapp
 
-> 16. launch your [सीताराम](https://amitxvf.pythonanywhere.com/)
+> 16. launch your [सीताराम](www.amitxvf.pythonanywhere.com/)
 
 
 ## [WSGI]
