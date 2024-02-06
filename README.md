@@ -6,7 +6,7 @@
 
 > 2. choose a username when registering carefully that will be part of website domain
 
-> 3. for example. if username is `amitxvf`, then domain will be [`www.amitxvf.pythonanywhere.com`](https://www.amitxvf.pythonanywhere.com/)
+> 3. for example. if username is `amitxvf`, then domain will be [`amitxvf.pythonanywhere.com`](https://amitxvf.pythonanywhere.com/)
 
 > 4. create an account with fast2sms.com for otp message to send
 
@@ -32,7 +32,7 @@
 
 > 15. do not forget to reload webapp
 
-> 16. launch your [सीताराम](https://www.amitxvf.pythonanywhere.com/)
+> 16. launch your [सीताराम](https://amitxvf.pythonanywhere.com/)
 
 
 ## [WSGI]
