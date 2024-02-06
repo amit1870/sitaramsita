@@ -24,7 +24,11 @@
                                 <div class="form-check form-check-inline">
                                     <input type="hidden" id="{{product.id}}" name="product_id" value="{{product.id}}"/>
                                 </div>
-                                <button class="btn btn-outline-warning " type="submit">Buy</button>
+                                {% if product.avl_qty == 0 %}
+                                    <button class="btn btn-outline-warning " type="submit" disabled>Buy</button>
+                                {% else %}
+                                    <button class="btn btn-outline-warning " type="submit">Buy</button>
+                                {% endif %}
 
                                 {% if request.user.is_superuser %}
                                     <a class="btn btn-outline-warning " href="{% url 'dukan:update_product'  prd_id=product.id %}" role="button">Update</a>
