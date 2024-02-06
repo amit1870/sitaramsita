@@ -39,6 +39,4 @@ python manage.py collectstatic
 cd $HOME
 
 # reload app
-touch $WSGI_FILE
-
-# create a task
+touch /var/www/{username}_pythonanywhere_com_wsgi.py
