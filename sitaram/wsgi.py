@@ -18,7 +18,5 @@ if CODE_PATH not in sys.path:
     sys.path.insert(0, CODE_PATH)
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'sitaram.settings')
-os.environ.setdefault('SECRET_KEY', 'nbvFD^sg-jsh^gjer4ds3fsd#s$sd*gsfvsjhas')
-os.environ.setdefault('FAST_SMS_AUTH_KEY', 'nbvFD^sg-jsh^gjer4ds3fsd#s$sd*gsfvsjhas')
 
 application = get_wsgi_application()
