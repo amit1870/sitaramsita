@@ -18,11 +18,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.getenv('SECRET_KEY','')
 
-USER = os.getenv('USER','amitxvf')
-
 DEBUG = False
 
-ALLOWED_HOSTS = ['127.0.0.1',f'{USER}.pythonanywhere.com', f'www.{USER}.pythonanywhere.com']
+ALLOWED_HOSTS = ['www.guruvarsitaram.shop', 'guruvarsitaram.shop']
 
 
 # Application definition
@@ -117,11 +115,11 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
-STATIC_ROOT = BASE_DIR / 'static'
+STATIC_ROOT = os.getenv('HOME') +'/public_html/static'
 
 MEDIA_URL = '/media/'
 
-MEDIA_ROOT = BASE_DIR / 'media'
+MEDIA_ROOT = os.getenv('HOME') +'/public_html/media'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
@@ -137,10 +135,10 @@ FAST_SMS = {
     'AUTH_KEY' : os.getenv('FAST_SMS_AUTH_KEY','')
 }
 
-SITE_NAME = 'sitaram sitaram'
+SITE_NAME = 'guruvarsitaram.shop'
 
 SITE_ID = 1
 
-META_KEYWORDS = "sitaram dukan apni dukan sitaram"
+META_KEYWORDS = "guruvarsitaram shop guruvarsitaram.shop"
 
-META_DESCRIPTION = "sitaram apni dukan online"
+META_DESCRIPTION = "guruvarsitaram shop guruvarsitaram.shop shop owned by guruvar sitaram"
