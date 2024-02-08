@@ -13,9 +13,9 @@ workon vrenv
 cd $HOME
 
 # clone git code
-git clone https://ghp_b2VYWGWEwKQxAIOIOHe4ivNMsyWtsx0ZGaUY@github.com/amit1870/sitaramsita.git
+git clone https://ghp_b2VYWGWEwKQxAIOIOHe4ivNMsyWtsx0ZGaUY@github.com/amit1870/sitaram.git
 
-cd sitaramsita
+cd sitaram
 
 # install requirements
 pip install -r requires.txt

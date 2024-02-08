@@ -20,7 +20,7 @@
 
 > 9. test your web app running successfully
 
-> 10. open a bash console and peform [`setup.sh`](https://github.com/amit1870/sitaramsita/blob/sitaram/setup.sh) commands
+> 10. open a bash console and peform [`setup.sh`](https://github.com/amit1870/sitaram/blob/sitaram/setup.sh) commands
 
 > 11. change the content of `/var/www/{username}_pythonanywhere_com_wsgi.py` from below [WSGI]
 
@@ -42,12 +42,12 @@ import os
 import sys
 
 HOME = os.environ['HOME']
-CODE_PATH = f'{HOME}/sitaramsita'
+CODE_PATH = f'{HOME}/sitaram'
 
 if CODE_PATH not in sys.path:
     sys.path.insert(0, CODE_PATH)
 
-os.environ["DJANGO_SETTINGS_MODULE"] = "sitaramsita.settings"
+os.environ["DJANGO_SETTINGS_MODULE"] = "sitaram.settings"
 os.environ["SECRET_KEY"] = "SECRET_KEY"
 os.environ["FAST_SMS_AUTH_KEY"] = "SMS_AUTH_SECRET_KEY"
 from django.core.wsgi import get_wsgi_application

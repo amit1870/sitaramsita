@@ -1,5 +1,5 @@
 from dukan.models import DukanDetail
-from sitaramsita import settings
+from sitaram import settings
 
 def sitaram(request):
     return {

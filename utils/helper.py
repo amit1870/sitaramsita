@@ -4,7 +4,7 @@ import requests
 from datetime import date
 from pathlib import Path
 
-from sitaramsita import settings
+from sitaram import settings
 
 def verify_mobile(mobile):
     success = True
