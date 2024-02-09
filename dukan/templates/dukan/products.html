@@ -33,7 +33,7 @@
                                 {% if request.user.is_superuser %}
                                     <a class="btn btn-outline-warning " href="{% url 'dukan:update_product'  prd_id=product.id %}" role="button">Update</a>
                                 {% else %}
-                                    <a class="btn btn-outline-warning " href="{% url 'dukan:update_product'  prd_id=product.id %}" role="button">View</a>
+                                    <a class="btn btn-outline-warning " href="{% url 'dukan:view_product'  prd_id=product.id %}" role="button">View</a>
                                 {% endif %}
                             </form>
                         </p>

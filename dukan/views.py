@@ -30,6 +30,22 @@ def view_all_product(request):
 
     return render(request, 'dukan/products.html', context)
 
+@csrf_protect
+@require_http_methods(["GET", "POST"])
+def view_product(request, prd_id):
+    ''' view products of a category into sitaram application '''
+
+    context = {}
+
+    product = Product.objects.filter(id=prd_id).first()
+
+    if request.method == "GET":
+        if product:
+            context['product'] = product
+            return render(request, 'dukan/product.html', context)
+        else:
+            return render(request, 'dukan/dukan_404.html', context)
+
 
 @csrf_protect
 @login_required

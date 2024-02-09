@@ -9,6 +9,7 @@ app_name = 'dukan'
 urlpatterns = [
     path("products/", views.view_all_product, name="view_all_product"),
     path("products/<int:prd_id>", views.update_product, name="update_product"),
+    path("products/<int:prd_id>/view", views.view_product, name="view_product"),
     path("save/", views.save_product, name="save_product"),
     path("upload/", views.upload_products, name="upload_products"),
     path("download/", views.download_products, name="download_products"),
