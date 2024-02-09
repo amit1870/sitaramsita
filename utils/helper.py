@@ -100,12 +100,32 @@ def handle_uploaded_file(f, rename='0'):
 
     return success
 
+
+def upload_product_image(f, product_id , count):
+    success = True
+
+    UPLOAD_DIR = f"{settings.MEDIA_ROOT}/{product_id}"
+    Path(UPLOAD_DIR).mkdir(parents=True, exist_ok=True)
+
+    FILE_PATH = f"{UPLOAD_DIR}/{count}"
+
+    delete_file(FILE_PATH)
+
+    try:    
+        with open(FILE_PATH, 'wb+') as destination:
+            for chunk in f.chunks():
+                destination.write(chunk)
+    except (Exception, FileNotFoundError):
+        success = False
+
+    return success
+
+
 def delete_file(file_path):
     try:
         Path.unlink(Path(file_path), missing_ok=True)
     except Exception:
         pass
-
 
 
 def read_text_file(file_path):

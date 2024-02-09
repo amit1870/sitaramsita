@@ -99,7 +99,7 @@ class CartTemplate(models.Model):
 
 class DukanDetail(models.Model):
     added_by = models.OneToOneField(get_user_model(), on_delete=models.CASCADE)
-    website = models.CharField(max_length=200, unique=True)
+    website = models.CharField(max_length=200, unique=True, default='http://guruvarsitaram.shop/')
     whatsapp = models.CharField(max_length=200, unique=False, default='https://web.whatsapp.com/')
     facebook = models.CharField(max_length=200, unique=False , default='https://www.facebook.com/')
     social = models.CharField(max_length=200, unique=False, default='https://www.facebook.com/')

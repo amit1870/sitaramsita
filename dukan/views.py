@@ -61,14 +61,18 @@ def save_product(request):
     form_data = request.POST.copy()
 
     prd_id = form_data.get('image_id', 0)
-    f = file_data.get('image_file', None)
-    
-    if f and hlp.handle_uploaded_file(f, prd_id):
-        return redirect("dukan:view_all_product")
-    else:
-        context['message'] = 'error while saving image on disk'
-        return render(request, 'dukan/product.html', context)
+    image_list = file_data.getlist('image_files[]', [])
 
+    product = Product.objects.filter(id=prd_id).first()
+
+    if product:
+        for count, f in enumerate(image_list):
+            if f and not hlp.upload_product_image(f, prd_id, count+1):
+                context['message'] = 'error while saving image on disk'
+                return render(request, 'dukan/product.html', context)
+
+
+    return redirect("dukan:view_all_product")
 
 
 
@@ -158,9 +162,6 @@ def process_cart(request):
                 order_cost = qty * float(product.cost)
 
                 total_cost = total_cost + order_cost
-
-                product.avl_qty = avl_qty - qty
-                product.save()
 
                 order_quantity.append(str(qty))
                 order_prices.append(str(product.cost))
@@ -254,11 +255,45 @@ def confirm_order(request, order_id):
     order = Order.objects.filter(id=order_id).first()
 
     if order:
+        ordered_qty = order.order_quantity.split(',')
+        for index, product in enumerate(order.order_products.all()):
+            product.avl_qty = product.avl_qty - float(ordered_qty[index])
+            product.save()
+
         order.order_status = False
         order.save()
 
     return redirect("dukan:view_orders")
 
+
+@csrf_protect
+@login_required
+@require_http_methods(["GET"])
+def delete_order(request, order_id):
+    ''' view to confirm order into sitaram application '''
+    context = {}
+
+    order = Order.objects.filter(id=order_id).first()
+
+    if order:
+        order.delete()
+
+    return redirect("dukan:view_orders")
+
+
+@csrf_protect
+@login_required
+@require_http_methods(["GET"])
+def cancel_order(request, order_id):
+    ''' view to confirm order into sitaram application '''
+    context = {}
+
+    order = Order.objects.filter(id=order_id).first()
+
+    if order:
+        order.delete()
+
+    return redirect("dukan:view_orders")    
 
 
 @csrf_protect

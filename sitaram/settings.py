@@ -20,7 +20,7 @@ SECRET_KEY = os.getenv('SECRET_KEY','')
 
 DEBUG = False
 
-ALLOWED_HOSTS = ['www.guruvarsitaram.shop', 'guruvarsitaram.shop']
+ALLOWED_HOSTS = ['127.0.0.1', 'www.guruvarsitaram.shop', 'guruvarsitaram.shop']
 
 
 # Application definition

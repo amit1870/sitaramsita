@@ -14,9 +14,16 @@
                             <li class="list-group-item list-group-item-warning">कितना : {{ order.order_quantity }} </li>
                             <li class="list-group-item list-group-item-warning">भाव : &#8377;{{ order.order_prices }} </li>
                             <li class="list-group-item list-group-item-warning">कुल : &#8377;{{ order.order_cost }} </li>
-                            <li class="list-group-item list-group-item-warning">ग्राहक : {{ order.order_by.mobile }} #{{order.id}}</li>
+                            <li class="list-group-item list-group-item-warning">ग्राहक : {{ order.order_by.mobile }} आर्डर  #{{order.id}}</li>
                             {% if request.user.is_superuser %}
-                                <li class="list-group-item list-group-item-warning"><a href="{% url 'dukan:confirm_order'  order_id=order.id %}" class="btn btn-outline-warning btn-sm">confirm</a>
+                                <li class="list-group-item list-group-item-warning">
+                                    <a href="{% url 'dukan:confirm_order'  order_id=order.id %}" class="btn btn-outline-warning btn-sm">confirm</a>
+                                    <a href="{% url 'dukan:delete_order'  order_id=order.id %}" class="btn btn-outline-warning btn-sm">delete</a>
+                                </li>
+                            {% else %}
+                                <li class="list-group-item list-group-item-warning">
+                                    <a href="{% url 'dukan:cancel_order'  order_id=order.id %}" class="btn btn-outline-warning btn-sm">cancel</a>
+                                </li>
                             {% endif %}
 
                         {% else %}
@@ -24,15 +31,17 @@
                             <li class="list-group-item list-group-item-success">कितना : {{ order.order_quantity }} </li>
                             <li class="list-group-item list-group-item-success">भाव : &#8377;{{ order.order_prices }} </li>
                             <li class="list-group-item list-group-item-success">कुल : &#8377;{{ order.order_cost }} </li>
-                            <li class="list-group-item list-group-item-success">ग्राहक : {{ order.order_by.mobile }} #{{order.id}}</li>
-                            <li class="list-group-item list-group-item-success">सबूत : {{ order.payment_string }} </li>
+                            <li class="list-group-item list-group-item-success">ग्राहक : {{ order.order_by.mobile }} आर्डर  #{{order.id}}</li>
+                            <li class="list-group-item list-group-item-success">प्रमाण : {{ order.payment_string }} </li>
                             {% if request.user.is_superuser %}
-                                <li class="list-group-item list-group-item-success"><a href="{% url 'dukan:confirm_order'  order_id=order.id %}" class="btn btn-outline-success btn-sm">confirm</a>
+                                <li class="list-group-item list-group-item-success">
+                                    <a href="{% url 'dukan:confirm_order'  order_id=order.id %}" class="btn btn-outline-success btn-sm">confirm</a>
+                                    <a href="{% url 'dukan:delete_order'  order_id=order.id %}" class="btn btn-outline-success btn-sm">delete</a>
+                                </li>
+                                
                             {% endif %}
 
                         {% endif %}
-
-                        </li>
                     </ul>
                 </div>
             </div>

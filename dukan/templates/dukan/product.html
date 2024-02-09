@@ -10,17 +10,42 @@
                     {{ message }}
                 </div>
             {% endif %}
+            {% if request.user.is_superuser %}
             <main class="form-signin w-100 m-auto">
                 <form action="{% url 'dukan:save_product' %}" method="post" enctype="multipart/form-data">
                     {% csrf_token %}
                     <div class="form-floating">
-                        <input type="file" class="form-control" id="image_id_{{product.id}}" aria-describedby="inputGroupFileAddon04" aria-label="Upload" name="image_file">
+                        <input type="file" class="form-control" id="image_id_{{product.id}}" aria-describedby="{{product.name}}" aria-label="Upload" name="image_files[]" multiple="">
                         <label for="image_id_{{product.id}}">प्रोडक्ट की फोटो</label>
                         <input type="hidden" name="image_id" value="{{product.id}}">
                     </div>
                     <button class="btn btn-outline-success w-100 py-2" type="submit">सीताराम</button>
                 </form>
             </main>
+            {% else %}
+                <div>
+                    <img class="d-block w-100" src="/media/{{product.id}}/1" alt="{{product.name}}">
+                </div>
+                <div>
+                    <img class="d-block w-100" src="/media/{{product.id}}/2" alt="{{product.name}}">
+                </div>
+                <div>
+                    <img class="d-block w-100" src="/media/{{product.id}}/3" alt="{{product.name}}">
+                </div>
+                <div>
+                    <form action="{% url 'dukan:add_product_in_cart'  prd_id=product.id %}" method="post">
+                        {% csrf_token %}
+                        <div class="form-check form-check-inline">
+                            <input type="hidden" id="{{product.id}}" name="product_id" value="{{product.id}}"/>
+                        </div>
+                        {% if product.avl_qty == 0 %}
+                            <button class="btn btn-outline-warning btn-lg" type="submit" disabled>Buy</button>
+                        {% else %}
+                            <button class="btn btn-outline-warning btn-lg" type="submit">Buy</button>
+                        {% endif %}
+                    </form>
+                </div>
+            {% endif %}
         </div>
     </div>
     <script type="text/javascript" src="{% static 'dukan/js/dukan.js' %}"></script>

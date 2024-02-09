@@ -20,6 +20,8 @@ urlpatterns = [
     path("orders/", views.view_orders, name="view_orders"),
     path("order/", views.process_cart, name="process_cart"),
     path("order/<int:order_id>/confirm", views.confirm_order, name="confirm_order"),
+    path("order/<int:order_id>/delete", views.delete_order, name="delete_order"),
+    path("order/<int:order_id>/cancel", views.cancel_order, name="cancel_order"),
     path("order/<int:order_id>/pay", views.order_payment, name="order_payment"),
 
     path("dukan/", views.about_dukan, name="about_dukan"),

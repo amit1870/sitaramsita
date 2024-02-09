@@ -35,6 +35,7 @@ class Manushya(AbstractBaseUser, PermissionsMixin):
     hexcode = models.CharField(max_length=6, blank=True)
     is_staff = models.BooleanField(default=False)
     is_active = models.BooleanField(default=False)
+    is_good = models.BooleanField(default=True)
 
     objects = UserManager()
 

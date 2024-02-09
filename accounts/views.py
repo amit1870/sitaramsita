@@ -113,7 +113,7 @@ def account_password(request):
         hexcode = hlp.generate_otp()
         manushya = get_user_model().objects.filter(mobile=mobile).first()
 
-        if manushya:
+        if manushya and manushya.is_good:
             if hlp.send_otp(mobile, hexcode):
                 manushya.hexcode = hexcode
                 manushya.save()
@@ -145,7 +145,7 @@ def account_login(request):
     password = form_data.get('password','')
     user = authenticate(request, username=mobile, password=password)
 
-    if user:
+    if user and user.is_good:
         login(request, user)
         return redirect("dukan:view_all_product")
 
