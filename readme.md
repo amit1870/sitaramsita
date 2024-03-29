@@ -32,7 +32,7 @@
 
 > 15. do not forget to reload webapp
 
-> 16. launch your [सीताराम](https:/guruvarsitaram.pythonanywhere.com/)
+> 16. launch your [सीताराम](https://guruvarsitaram.pythonanywhere.com/)
 
 
 ## [WSGI]
